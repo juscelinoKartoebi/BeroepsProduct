@@ -1,28 +1,27 @@
 package sr.unasat.dfs;
 
     public class Stack {
-
         private final int SIZE = 20;
         private int[] stack;
         private int top;
 
-        public Stack(){          // constructor
-            stack = new int[SIZE];         // make array
-            top = -1;
+        public Stack(){
+            stack = new int[SIZE];          // make array
+            top = -1;                       // wijst dat je nog geen items erin heb gezet
         }
         public void push(int j){            // put item on stack
-         stack[++top] = j; }
-        public int pop(){                // take item off stack
+         stack[++top] = j;
+        }
 
+        public int pop(){                  // take item off stack
             return stack[top--];
         }
 
-        public int peek()           // peek at top of stack
-
-        { return stack[top];
+        public int peek(){                // peek at top of stack
+        return stack[top];
         }
-        public boolean isEmpty()     // true if nothing on stack-
-        { return (top == -1);
+        public boolean isEmpty(){         // true if nothing on stack-
+         return (top == -1);
         }
     }
 
@@ -30,22 +29,19 @@ package sr.unasat.dfs;
     public String stad;                      // stad (e.g. "Paramaribo")
     public boolean wasVisited;
 
-    public Vertex(String city ){            // constructor
-
+    public Vertex(String city ){
         stad = city;
         wasVisited = false;
     }
 }
         class Graph {
-
         private final int MAX_VERTS = 20;
         private Vertex vertexList[];      // list of vertices
         private int adjMat[][];           // adjacency matrix
         private int nVerts;               // current number of vertices
         private Stack theStack;
 
-        public Graph(){         // constructor
-
+        public Graph(){
             vertexList = new Vertex[MAX_VERTS];
             adjMat = new int[MAX_VERTS][MAX_VERTS];            // adjacency matrix
             nVerts = 0;
@@ -53,7 +49,7 @@ package sr.unasat.dfs;
                 for(int k=0; k<MAX_VERTS; k++)            // set adjacency matrix to 0
                     adjMat[j][k] = 0;
             theStack = new Stack();
-        } // end constructor
+        }
 
         public void addVertex(String city)
         {
@@ -66,16 +62,15 @@ package sr.unasat.dfs;
          // adjMat[end][start] = 1;
         }
 
-        public void displayVertex(int v)
-        {
+        public void displayVertex(int v){
             System.out.print(vertexList[v].stad);
         }
-        public void dfs()          // depth-first search
-        {                         // begin at vertex 0
-            vertexList[0].wasVisited = true;           // mark it
+        public void dfs(){        // depth-first search
+                                 // begin at vertex 0
+            vertexList[0].wasVisited = true;     // mark it
             displayVertex(0);                 // display it
-            theStack.push(0);                  // push it
-            while( !theStack.isEmpty() )           // until stack empty,
+            theStack.push(0);                 // push it
+            while( !theStack.isEmpty() )        // until stack empty,
 
             {
                 // get an unvisited vertex adjacent to stack top
@@ -86,20 +81,19 @@ package sr.unasat.dfs;
                 else                     // if it exists,
                 {
                     vertexList[v].wasVisited = true;     // mark it
-                    displayVertex(v);                           // display it
+                    displayVertex(v);                    // display it
 
-                    theStack.push(v);                      // push it
+                    theStack.push(v);                    // push it
                 }
-            } // end while
+            }
 
             // stack is empty, so we’re done
             for(int j=0; j<nVerts; j++)                  // reset flags
                 vertexList[j].wasVisited = false;
-        } // end dfs
+        }
 
         // returns an unvisited vertex adj to v
-        public int getAdjUnvisitedVertex(int v)
-        {
+        public int getAdjUnvisitedVertex(int v){
             for(int j=0; j<nVerts; j++)
                 if(adjMat[v][j]==1 && vertexList[j].wasVisited==false)
                     return j;

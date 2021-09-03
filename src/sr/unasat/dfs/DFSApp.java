@@ -1,6 +1,6 @@
 package sr.unasat.dfs;
 
-class App
+class DFSApp
 {
     public static void main(String[] args)
     {
@@ -30,7 +30,7 @@ class App
         theGraph.addEdge(7,6);
         theGraph.addEdge(6,5);
 
-        System.out.print("De bestaande bestemmingen zijn: ");
+        System.out.print("The following destinations that exist are: ");
         theGraph.dfs();
         System.out.println();
     }

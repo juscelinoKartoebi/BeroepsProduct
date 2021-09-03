@@ -7,7 +7,7 @@ public class Max {
     // distance and parent
         // items stored in sPath array
         public int distancePrice;            // price of distance from start to this vertex
-        public int parentVert;          // current parent of this vertex
+        public int parentVert;               // current parent of this vertex
 
         public Max(int parentV, int distPrice) {
             distancePrice = distPrice;
@@ -37,11 +37,11 @@ public class Max {
             expPath = new Max[MAX_VERTS];             // shortest paths
 
         }
-        public void addVertex(String city) {
+        public void addVertex(String city){
             vertexList[nVerts++] = new Vertex(city);
         }
 
-        public void addEdge(int start, int end, int weight) {
+        public void addEdge(int start, int end, int weight){
             adjMat[start][end] = weight;     // (directed)
         }
 
@@ -76,10 +76,10 @@ public class Max {
                 // put current vertex in tree
                 vertexList[currentVert].isInTree = true;
                 nTree++;
-                adjust_sPath_longest();                 // update sPath[] array
+                adjust_sPath_expensive();                 // update sPath[] array
             }                                           // end while(nTree<nVerts)
 
-            displayLongestPaths();
+            displayExpensivePaths();
             nTree = 0;                                  // clear tree
             for (int j = 0; j < nVerts; j++)
                 vertexList[j].isInTree = false;
@@ -100,7 +100,7 @@ public class Max {
         }
 
         //for longest
-        public void adjust_sPath_longest() {              // adjust values in shortest-path array sPath
+        public void adjust_sPath_expensive() {              // adjust values in shortest-path array sPath
             int column = 1;                               // skip starting vertex
             while(column < nVerts)                        // go across columns
             {
@@ -118,10 +118,10 @@ public class Max {
                 int startToFringe = startToCurrent + currentToFringe;
 
                 // get distance of current sPath entry
-                int sPathDist = expPath[column].distancePrice;
+                int ePathDist = expPath[column].distancePrice;
 
                 // compare distance from start with sPath entry
-                if(startToFringe > sPathDist && currentToFringe != 0)    // if longer
+                if(startToFringe > ePathDist && currentToFringe != 0)    // if longer
                 {
                     // update the longest Path
                     expPath[column].parentVert = currentVert;
@@ -130,7 +130,7 @@ public class Max {
                 column++;
             }
         }
-        public void displayLongestPaths() {
+        public void displayExpensivePaths() {
             for (int j = 0; j < nVerts; j++)                          // display contents of sPath[]
             {
                 System.out.print(vertexList[j].stad + "= ");           // B=

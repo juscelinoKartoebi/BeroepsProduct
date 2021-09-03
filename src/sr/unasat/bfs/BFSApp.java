@@ -28,8 +28,8 @@ class BFSApp {
         bfsGraph.addEdge(7, 6);
         bfsGraph.addEdge(6, 5);
 
-        System.out.print("Visits: ");
+        System.out.print("Cities that are adjacent to each others are: ");
         bfsGraph.bfs();
         System.out.println();
-    } // end main()
+    }
 }

@@ -1,8 +1,8 @@
-package sr.unasat.shortestpath;
+package sr.unasat.longestpath;
 
 import java.util.Scanner;
 
-class sPathApp {
+public class EXPPathApp {
     public static void main(String[] args) {
         Graph theGraph = new Graph();
         theGraph.addVertex("Paramaribo");         // 0
@@ -30,12 +30,11 @@ class sPathApp {
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter current location");
         int userGiven = scan.nextInt();
-        System.out.println("The cheapest routes are: ");
 
-        theGraph.shortPath(userGiven);
+        System.out.println("Price of the most expensive routes are:");
 
-        System.out.println("");
+        theGraph.longestPath(userGiven);
+        System.out.println();
         scan.close();
     }
 }
-
