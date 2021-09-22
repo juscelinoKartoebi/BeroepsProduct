@@ -11,10 +11,10 @@ public class Queue {
             front = 0;
             rear = -1;
         }
-        public void insert(int item){                      // put item at rear of queue
+        public void insert(int data){                      // put item at rear of queue
             if(rear == SIZE-1)
                 rear = -1;
-            queArray[++rear] = item;
+            queArray[++rear] = data;
         }
 
         public int remove(){                               // take item from front of queue
@@ -28,14 +28,14 @@ public class Queue {
         }
     }
 
-class bGraph {
+class BGraph {
         private final int MAX_VERTS = 20;
         private Vertex vertexList[];                   // list of vertices
         private int adjMat[][];                        // adjacency matrix
         private int nVerts;                            // current number of vertices
         private Queue theQueue;
 
-        public bGraph() {                                  // constructor
+        public BGraph() {                                  // constructor
             vertexList = new Vertex[MAX_VERTS];
                                                           // adjacency matrix
             adjMat = new int[MAX_VERTS][MAX_VERTS];
@@ -50,7 +50,7 @@ class bGraph {
             vertexList[nVerts++] = new Vertex(city);
         }
 
-        public void addEdge(int start, int end){
+        public void addEdge(int start, int end){ //voegt edges toe en geeft aan waar het begint een waar het eindigt
             adjMat[start][end] = 1;
           // adjMat[end][start] = 1;
         }
@@ -69,7 +69,6 @@ class bGraph {
                 int v1 = theQueue.remove();                // remove vertex at head
 
                                                            // until it has no unvisited neighbors
-
                 while( (v2=getAdjUnvisitedVertex(v1)) != -1 ){
                     vertexList[v2].wasVisited = true;           // mark it
                     displayVertex(v2);                          // display it
@@ -82,18 +81,17 @@ class bGraph {
                 vertexList[j].wasVisited = false;
         }
         // returns an unvisited vertex adj to v
-        public int getAdjUnvisitedVertex(int v)
-        {
+        public int getAdjUnvisitedVertex(int v){   //word gebruik om neighbours op te zoeken
             for(int j=0; j<nVerts; j++)
                 if(adjMat[v][j]==1 && !vertexList[j].wasVisited)
                     return j;
             return -1;
-        }                                                  // end getAdjUnvisitedVertex()
-    }                                                      // end class Graph
+        }
+    }
 
 class BFSApp {
     public static void main(String[] args) {
-        bGraph bfsGraph = new bGraph();
+        BGraph bfsGraph = new BGraph();
         bfsGraph.addVertex("Paramaribo");       // 0
         bfsGraph.addVertex("Port Of Spain");    // 1
         bfsGraph.addVertex("Caracas");          // 2

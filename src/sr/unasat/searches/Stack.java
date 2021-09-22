@@ -9,8 +9,8 @@ package sr.unasat.searches;
             stack = new int[SIZE];          // make array
             top = -1;                       // wijst dat je nog geen items erin heb gezet
         }
-        public void push(int j){            // put item on stack
-         stack[++top] = j;
+        public void push(int data){            // put item on stack
+         stack[++top] = data;
         }
 
         public int pop(){                  // take item off stack
@@ -41,16 +41,16 @@ package sr.unasat.searches;
             theStack = new Stack();
         }
 
-        public void addVertex(String city){
+        public void addVertex(String city){            //voegt vertices toe aan je vertexList array
             vertexList[nVerts++] = new Vertex(city);
         }
 
-        public void addEdge(int start, int end){
-            adjMat[start][end] = 1;
+        public void addEdge(int start, int end){    //voegt edges toe en geeft aan waar het begint een waar het eindigt
+            adjMat[start][end] = 1; //(directed)
          // adjMat[end][start] = 1;
         }
-        public void displayVertex(int v){
-            System.out.print(vertexList[v].stad + "-" + " ");
+        public void displayVertex(int v){                  //hier word de bezochte vertices displayed
+            System.out.print(vertexList[v].stad + "- ");
         }
 
         public void dfs(){        // depth-first search
@@ -58,30 +58,28 @@ package sr.unasat.searches;
             vertexList[0].wasVisited = true;     // mark it
             displayVertex(0);                 // display it
             theStack.push(0);                 // push it
-            while( !theStack.isEmpty() ) {        // until stack empty,
+            while( !theStack.isEmpty() ) {        // gaat loopen until stack empty,
 
                 // get an unvisited vertex adjacent to stack top
                 int v = getAdjUnvisitedVertex( theStack.peek() );
                 if(v == -1)                    // if no such vertex,
-
                     theStack.pop();
-                else                     // if it exists,
-                {
+                else{
+                    // if it exists,
                     vertexList[v].wasVisited = true;     // mark it
                     displayVertex(v);                    // display it
 
                     theStack.push(v);                    // push it
                 }
             }
-
             // stack is empty, so we’re done
             for(int j=0; j<nVerts; j++)                  // reset flags
                 vertexList[j].wasVisited = false;
         }
             // returns an unvisited vertex adj to v
-            public int getAdjUnvisitedVertex(int v){
+            public int getAdjUnvisitedVertex(int v){     //zoekt j neighbours van v
                 for(int j=0; j<nVerts; j++)
-                    if(adjMat[v][j]==1 && vertexList[j].wasVisited==false) {
+                    if(adjMat[v][j]==1 && vertexList[j].wasVisited==false){
                         return j;
                     }
                 return -1;

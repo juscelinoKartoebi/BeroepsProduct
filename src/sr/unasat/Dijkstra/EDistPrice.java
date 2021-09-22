@@ -2,11 +2,11 @@ package sr.unasat.Dijkstra;
 
 import java.util.Scanner;
 
-public class eDistPrice { // distanceprice and parent, items stored in ePath array
-        public int distancePrice;            // price of distance from start to this vertex
+public class EDistPrice { // distanceprice and parent, items stored in ePath array
+        public int distancePrice;            // price of  fdistancerom start to this vertex
         public int parentVert;               // current parent of this vertex
 
-        public eDistPrice(int parentV, int distPrice) {
+        public EDistPrice(int parentV, int distPrice) {
             distancePrice = distPrice;
             parentVert = parentV;
         }
@@ -14,12 +14,12 @@ public class eDistPrice { // distanceprice and parent, items stored in ePath arr
 
 class Graph {
     private final int MAX_VERTS = 20;
-    private final int INFINITE = 0;
+    private final int INFINITE = 0;  // moet groter zijn dan je minimale
     private Vertex vertexList[];
     private int adjMat[][];
     private int nVerts;
     private int nTree;
-    private eDistPrice ePath[];
+    private EDistPrice ePath[];
     private int currentVert;
     private int startToCurrent;
 
@@ -32,7 +32,7 @@ class Graph {
         for (int j = 0; j < MAX_VERTS; j++)          // set adjacency
             for (int k = 0; k < MAX_VERTS; k++)      // matrix
                 adjMat[j][k] = INFINITE ;            // to infinite
-        ePath = new eDistPrice[MAX_VERTS];           // expensive paths
+        ePath = new EDistPrice[MAX_VERTS];           // expensive paths
 
     }
     public void addVertex(String city){
@@ -56,11 +56,10 @@ class Graph {
         vertexList[startTree].isInTree = true;
         nTree = 1;                                 // put it in tree
 
-
         // transfer row of distancePrice from adjMat to ePath
         for(int j=0; j<nVerts; j++) {
             int tempDist = adjMat[startTree][j];
-            ePath[j] = new eDistPrice(startTree, tempDist); //opslaan van je temp weight
+            ePath[j] = new EDistPrice(startTree, tempDist); //opslaan van je temp weight
         }
         // until all vertices are in the tree
         while(nTree < nVerts) {
@@ -69,7 +68,7 @@ class Graph {
 
             if(maxDist == INFINITE) {                   // if all infinite
                                                         // or in tree,
-                System.out.println("There are unreachable vertices");
+                System.out.println("(There are unreachable vertices!)");
                 break;                                  // ePath is complete
             } else {                                    // reset currentVert
                 currentVert = indexMax;                 // to the closest vert
@@ -80,7 +79,7 @@ class Graph {
             // put current vertex in tree
             vertexList[currentVert].isInTree = true;
             nTree++;
-            adjust_ePath_expensive();                 // update ePath[] array
+            adjust_ePath();                 // update ePath[] array
         }                                             // end while(nTree<nVerts)
 
         displayExpensivePaths();
@@ -93,7 +92,7 @@ class Graph {
         int maxDist= INFINITE;                      // assume maximum
         int indexMax = 0;
 
-        for(int j=1; j<nVerts; j++){                // voor elke vertex, als het in de tree is en groter dan de vorige
+        for(int j=1; j<nVerts; j++){                // voor elke vertex, als het niet in de tree is en groter dan de vorige
             if( !vertexList[j].isInTree && ePath[j].distancePrice > maxDist ){
                 maxDist = ePath[j].distancePrice;
                 indexMax = j;                        // update maximum
@@ -103,7 +102,7 @@ class Graph {
     }
 
     //for longest
-    public void adjust_ePath_expensive() {            // adjust values in expensive-path array ePath
+    public void adjust_ePath() {            // adjust values in expensive-path array ePath
         int column = 1;                               // skip starting vertex
         while(column < nVerts)                        // go across columns
         {
