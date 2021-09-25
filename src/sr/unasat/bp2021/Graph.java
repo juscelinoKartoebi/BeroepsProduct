@@ -2,7 +2,6 @@ package sr.unasat.bp2021;
 
 class Graph {
     private final int MAX_VERTS = 20;
-
     private Vertex vertexList[];                  // list of vertices
     private int adjMat[][];                        // adjacency matrix
     private int nVerts;                            // current number of vertices
@@ -11,7 +10,7 @@ class Graph {
 
     private final int INFINITY = 1000000;
     private int nTree;                    // current number of vertices
-    private DistancePrice cPath[];             // array for shortest-path data
+    private DistancePrice cPath[];        // array for shortest-path data
     private int currentVert;              // current vertex
     private int startToCurrent;           // distance to currentVert
 
@@ -36,8 +35,6 @@ class Graph {
 //        for (int n = 0; n < MAX_VERTS; n++)                // set adjacency
 //            for (int p = 0; p< MAX_VERTS; p++)            // matrix to 0
 //                adjMat[n][p] = INFINITE  ;
-
-
 
         theQueue = new Queue();
         theStack = new Stack();
@@ -84,7 +81,6 @@ class Graph {
 //---------------------------------------------------------------------------------------------------------------------
 
     public void dfs() {        // depth-first search
-        // begin at vertex 0
         vertexList[0].wasVisited = true;     // mark it
         displayVertex(0);                 // display it
         theStack.push(0);                 // push it
