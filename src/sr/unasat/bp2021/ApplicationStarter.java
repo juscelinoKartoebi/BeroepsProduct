@@ -5,7 +5,7 @@ public class ApplicationStarter {
     public static void main(String[] args) {
         Graph theGraph = new Graph();
         theGraph.addVertex("Paramaribo");         // 0
-        theGraph.addVertex("Port of Spain");      // 1
+        theGraph.addVertex("PortOfSpain");      // 1
         theGraph.addVertex("Caracas");            // 2
         theGraph.addVertex("Oranjestad");         // 3
         theGraph.addVertex("Kingston");           // 4

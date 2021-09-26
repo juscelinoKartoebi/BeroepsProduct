@@ -129,6 +129,7 @@ class Graph {
         while (nTree < nVerts) {
             int indexMin = getMin();                   // je haalt de minimum van cPath
             int minDist = cPath[indexMin].distancePrice; //van de minimum kijken we dan wat de distPrice is
+
             if (minDist == INFINITY) {                   // als distance inf is, dan zijn we klaar
                 System.out.println("note!!(There are unreachable vertices!)");
                 break;                                 // cPath is compleet
