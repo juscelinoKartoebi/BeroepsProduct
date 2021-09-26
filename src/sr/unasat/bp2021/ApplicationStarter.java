@@ -9,8 +9,8 @@ public class ApplicationStarter {
         theGraph.addVertex("Caracas");            // 2
         theGraph.addVertex("Oranjestad");         // 3
         theGraph.addVertex("Kingston");           // 4
-        theGraph.addVertex("San Juan");           // 5
-        theGraph.addVertex("Saint John's");       // 6
+        theGraph.addVertex("SanJuan");           // 5
+        theGraph.addVertex("SaintJohn's");       // 6
         theGraph.addVertex("Bridgetown");         // 7
 
 //      (Dijkstra)
