@@ -42,7 +42,7 @@ class Graph {
         ePath = new DistancePrice[MAX_VERTS];
     }
 
-    public void addVertex(String city) {
+    public void addVertex(String city) { //add vertices in de vertexList[]
         vertexList[nVerts++] = new Vertex(city);
     }
 
@@ -96,7 +96,7 @@ class Graph {
                 theStack.push(v);                    // push it
             }
         }
-        // stack is empty, so we’re done
+        // stack/queue is empty, so we’re done
         for (int j = 0; j < nVerts; j++)                  // reset flags
             vertexList[j].wasVisited = false;
     }
@@ -210,101 +210,101 @@ class Graph {
 
 
     //--------------------------------------------------------------------------------------------------------------}
-//    public void findExpensivePaths(int start) {     // find all expensive paths
-//        int startTree = start;
-//        vertexList[startTree].isInTree = true;
-//        nTree = 1;                                 // put it in tree
-//
-//        // transfer row of distancePrice from adjMat to ePath
-//        for (int j = 0; j < nVerts; j++) {
-//            int tempDist = adjMat[startTree][j];
-//            ePath[j] = new DistancePrice(startTree, tempDist); //opslaan van je temp weight
-//        }
-//        // until all vertices are in the tree
-//        while (nTree < nVerts) {
-//            int indexMax = getMax();                    // get maximum from ePath
-//            int maxDist = ePath[indexMax].distancePrice;
-//
-//            if (maxDist == INFINITE) {                   // if all infinite
-//                // or in tree,
-//                System.out.println("(There are unreachable vertices!)");
-//                break;                                  // ePath is complete
-//            } else {                                    // reset currentVert
-//                currentVert = indexMax;                 // to the closest vert
-//                startToCurrent = ePath[indexMax].distancePrice;
-//                // maximum distance from startTree is
-//                // to currentVert, and is startToCurrent
-//            }
-//            // put current vertex in tree
-//            vertexList[currentVert].isInTree = true;
-//            nTree++;
-//            adjust_ePath();                 // update ePath[] array
-//        }                                             // end while(nTree<nVerts)
-//
-//        displayExpensivePaths();
-//        nTree = 0;                                    // clear tree
-//        for (int j = 0; j < nVerts; j++)
-//            vertexList[j].isInTree = false;
-//    }
-//
-//    //get max path in lijst
-//    public int getMax() {                           // get entry from ePath with maximum distance
-//        int maxDist = INFINITE;                      // assume maximum
-//        int indexMax = 0;
-//
-//        for (int j = 1; j < nVerts; j++) {                // voor elke vertex, als het niet in de tree is en groter dan de vorige
-//            if (!vertexList[j].isInTree && ePath[j].distancePrice > maxDist) {
-//                maxDist = ePath[j].distancePrice;
-//                indexMax = j;                        // update maximum
-//            }
-//        }                                            // end for
-//        return indexMax;                             // return index of maximum
-//    }
-//
-//    //for longest
-//    public void adjust_ePath() {            // adjust values in expensive-path array ePath
-//        int column = 1;                               // skip starting vertex
-//        while (column < nVerts)                        // go across columns
-//        {
-//            // if this column vertex already in tree, skip it
-//            if (vertexList[column].isInTree) {
-//                column++;
-//                continue;
-//            }
-//            // calculate distance for one ePath entry
-//            // get edge from currentVert to column
-//            int currentToFringe = adjMat[currentVert][column];
-//
-//            // add distance from start
-//            int startToFringe = startToCurrent + currentToFringe;
-//
-//            // get distance of current ePath entry
-//            int ePathDist = ePath[column].distancePrice;
-//
-//            // compare distance from start with ePath entry
-//            if (startToFringe > ePathDist && currentToFringe != 0) {    // if longer, update the longest Path
-//                ePath[column].parentVert = currentVert;
-//                ePath[column].distancePrice = startToFringe;
-//            }
-//            column++;
-//        }
-//    }
-//
-//    public void displayExpensivePaths() {
-//        for (int j = 0; j < nVerts; j++)                          // display contents of ePath[]
-//        {
-//            System.out.print(vertexList[j].stad + "= ");          // Paramaribo =
-//            if (ePath[j].distancePrice == INFINITE)
-//                System.out.print("not reachable");                         // inf
-//
-//            else
-//                System.out.print(ePath[j].distancePrice + "$");          // 500
-//
-//            String parent = vertexList[ePath[j].parentVert].stad;
-//
-//            System.out.println(" (" + "through" + " " + parent + ") ");         // (Paramaribo)
-//
-//        }
-//        System.out.println("");
-//    }
+    public void findExpensivePaths(int start) {     // find all expensive paths
+        int startTree = start;
+        vertexList[startTree].isInTree = true;
+        nTree = 1;                                 // put it in tree
+
+        // transfer row of distancePrice from adjMat to ePath
+        for (int j = 0; j < nVerts; j++) {
+            int tempDist = adjMat[startTree][j];
+            ePath[j] = new DistancePrice(startTree, tempDist); //opslaan van je temp weight
+        }
+        // until all vertices are in the tree
+        while (nTree < nVerts) {
+            int indexMax = getMax();                    // get maximum from ePath
+            int maxDist = ePath[indexMax].distancePrice;
+
+            if (maxDist == INFINITE) {                   // if all infinite
+                // or in tree,
+                System.out.println("(There are unreachable vertices!)");
+                break;                                  // ePath is complete
+            } else {                                    // reset currentVert
+                currentVert = indexMax;                 // to the closest vert
+                startToCurrent = ePath[indexMax].distancePrice;
+                // maximum distance from startTree is
+                // to currentVert, and is startToCurrent
+            }
+            // put current vertex in tree
+            vertexList[currentVert].isInTree = true;
+            nTree++;
+            adjust_ePath();                 // update ePath[] array
+        }                                             // end while(nTree<nVerts)
+
+        displayExpensivePaths();
+        nTree = 0;                                    // clear tree
+        for (int j = 0; j < nVerts; j++)
+            vertexList[j].isInTree = false;
+    }
+
+    //get max path in lijst
+    public int getMax() {                           // get entry from ePath with maximum distance
+        int maxDist = INFINITE;                      // assume maximum
+        int indexMax = 0;
+
+        for (int j = 1; j < nVerts; j++) {                // voor elke vertex, als het niet in de tree is en groter dan de vorige
+            if (!vertexList[j].isInTree && ePath[j].distancePrice > maxDist) {
+                maxDist = ePath[j].distancePrice;
+                indexMax = j;                        // update maximum
+            }
+        }                                            // end for
+        return indexMax;                             // return index of maximum
+    }
+
+    //for longest
+    public void adjust_ePath() {            // adjust values in expensive-path array ePath
+        int column = 1;                               // skip starting vertex
+        while (column < nVerts)                        // go across columns
+        {
+            // if this column vertex already in tree, skip it
+            if (vertexList[column].isInTree) {
+                column++;
+                continue;
+            }
+            // calculate distance for one ePath entry
+            // get edge from currentVert to column
+            int currentToFringe = adjMat[currentVert][column];
+
+            // add distance from start
+            int startToFringe = startToCurrent + currentToFringe;
+
+            // get distance of current ePath entry
+            int ePathDist = ePath[column].distancePrice;
+
+            // compare distance from start with ePath entry
+            if (startToFringe > ePathDist && currentToFringe != 0) {    // if longer, update the longest Path
+                ePath[column].parentVert = currentVert;
+                ePath[column].distancePrice = startToFringe;
+            }
+            column++;
+        }
+    }
+
+    public void displayExpensivePaths() {
+        for (int j = 0; j < nVerts; j++)                          // display contents of ePath[]
+        {
+            System.out.print(vertexList[j].stad + "= ");          // Paramaribo =
+            if (ePath[j].distancePrice == INFINITE)
+                System.out.print("not reachable");                         // inf
+
+            else
+                System.out.print(ePath[j].distancePrice + "$");          // 500
+
+            String parent = vertexList[ePath[j].parentVert].stad;
+
+            System.out.println(" (" + "through" + " " + parent + ") ");         // (Paramaribo)
+
+        }
+        System.out.println("");
+    }
 }
