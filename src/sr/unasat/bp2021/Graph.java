@@ -46,7 +46,7 @@ class Graph {
         vertexList[nVerts++] = new Vertex(city);
     }
 
-    public void addEdge(int start, int end) { //voegt edges toe en geeft aan waar het begint en waar het eindigt
+    public void addEdge(int start, int end) { //voegt edges toe in de adjMat
         adjMat[start][end] = 1;
         // adjMat[end][start] = 1;
     }
@@ -178,13 +178,13 @@ class Graph {
             // De twee weights pakken en optellen
             int startToFringe = startToCurrent + currentToFringe;
 
-            // get distancePrice of current sPath entry
-            int sPathDist = cPath[column].distancePrice;
+            // get distancePrice of current cPath entry
+            int cPathDist = cPath[column].distancePrice;
 
-            // compare distance from start with sPath entry
-            if (startToFringe < sPathDist)                         // if shorter,
+            // compare distance from start with cPath entry
+            if (startToFringe < cPathDist)                         // if shorter,
             {
-                // update sPath
+                // update cPath
                 cPath[column].parentVert = currentVert;
                 cPath[column].distancePrice = startToFringe;
             }
